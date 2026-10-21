@@ -1475,12 +1475,14 @@ select:focus-visible {
 }
 
 .home-nav a:hover,
+.home-nav span[aria-disabled="true"]:hover,
 .courses-heading > a:hover {
   color: #d94c24;
 }
 
 .home-nav span[aria-disabled="true"] {
   cursor: default;
+  transition: color 160ms ease;
 }
 
 .home-header-actions {
@@ -1490,13 +1492,59 @@ select:focus-visible {
   margin-left: auto;
 }
 
+.auth-actions {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.auth-loading {
+  display: block;
+  height: 36px;
+  width: 108px;
+}
+
+.auth-link,
+.auth-signup {
+  border: 0;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.auth-link {
+  background: transparent;
+  color: #25282d;
+  padding: 9px 2px;
+}
+
+.auth-link:hover {
+  color: #d94c24;
+}
+
+.auth-signup {
+  background: #e85e38;
+  border-radius: 7px;
+  color: #fff;
+  padding: 10px 16px;
+}
+
+.auth-signup:hover {
+  background: #d94c24;
+}
+
 .notification-icon {
   align-items: center;
   color: #34373c;
   display: inline-flex;
   height: 36px;
   justify-content: center;
+  transition: color 160ms ease;
   width: 28px;
+}
+
+.notification-icon:hover {
+  color: #d94c24;
 }
 
 .notification-icon .home-icon {
@@ -1856,6 +1904,10 @@ select:focus-visible {
     gap: 14px;
   }
 
+  .auth-actions {
+    gap: 9px;
+  }
+
   .profile-avatar {
     height: 40px;
     width: 40px;
@@ -2035,6 +2087,19 @@ select:focus-visible {
 
   .home-header-actions {
     gap: 7px;
+  }
+
+  .auth-actions {
+    gap: 5px;
+  }
+
+  .auth-link,
+  .auth-signup {
+    font-size: 10px;
+  }
+
+  .auth-signup {
+    padding: 8px 9px;
   }
 
   .notification-icon {

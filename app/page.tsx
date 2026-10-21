@@ -1,4 +1,10 @@
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
+import {
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
 
 type IconName = "arrow" | "bell" | "search" | "chart" | "clock" | "book";
 
@@ -32,25 +38,6 @@ function VertexMark() {
   return (
     <svg aria-hidden="true" className="home-brand-mark" viewBox="0 0 32 32">
       <path d="M2 4h28L16 29 2 4Zm8 5 6 11 6-11H10Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function ProfileAvatar() {
-  return (
-    <svg aria-hidden="true" className="profile-avatar" viewBox="0 0 48 48">
-      <defs>
-        <clipPath id="avatar-clip"><circle cx="24" cy="24" r="24" /></clipPath>
-      </defs>
-      <g clipPath="url(#avatar-clip)">
-        <path fill="#eadfd6" d="M0 0h48v48H0z" />
-        <path fill="#28211f" d="M10 49c0-13 4-19 13-20h5c10 2 13 9 13 20z" />
-        <path fill="#32221e" d="M15 17c0-9 5-14 11-14 8 0 12 6 11 16l-3 10H16z" />
-        <path fill="#d79b78" d="M17 17c0-6 3-10 8-10 6 0 9 4 9 10v7c0 6-4 10-9 10s-8-4-8-10z" />
-        <path fill="#32221e" d="M15 18c1-9 5-14 12-14 5 0 8 3 10 8-5-2-8-4-11-7-2 5-5 8-11 10z" />
-        <path fill="#4a2f28" d="M19 20h3m6 0h3" stroke="#4a2f28" strokeLinecap="round" strokeWidth="1.5" />
-        <path fill="none" d="M23 27c2 1 4 1 6 0" stroke="#8b5143" strokeLinecap="round" />
-      </g>
     </svg>
   );
 }
@@ -120,7 +107,23 @@ export default function Home() {
             <span className="notification-icon" aria-label="Notifications">
               <Icon name="bell" />
             </span>
-            <ProfileAvatar />
+            <Suspense fallback={<span className="auth-loading" aria-hidden="true" />}>
+              <Show when="signed-out">
+                <div className="auth-actions">
+                  <SignInButton mode="redirect">
+                    <button className="auth-link" type="button">Sign in</button>
+                  </SignInButton>
+                  <SignUpButton mode="redirect">
+                    <button className="auth-signup" type="button">Sign up</button>
+                  </SignUpButton>
+                </div>
+              </Show>
+              <Show when="signed-in">
+                <UserButton
+                  appearance={{ elements: { avatarBox: "profile-avatar" } }}
+                />
+              </Show>
+            </Suspense>
           </div>
         </header>
 

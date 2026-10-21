@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vertex Design System",
-  description: "The visual language and component library for the Vertex learning platform.",
+  title: "Vertex — Intelligent Learning",
+  description: "Find the exact lessons you want to learn across all your courses.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

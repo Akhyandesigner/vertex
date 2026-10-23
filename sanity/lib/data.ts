@@ -42,18 +42,20 @@ export interface CourseSummary {
   category?: Pick<Category, '_id' | 'title' | 'slug'> | null
 }
 
+export interface LessonSummary {
+  _id: string
+  title: string
+  slug: string
+  duration?: number | null
+  freePreview?: boolean | null
+  thumbnail?: SanityImage | null
+}
+
 export interface CourseModule {
   _key: string
   title: string
   summary?: string | null
-  lessons: Array<{
-    _id: string
-    title: string
-    slug: string
-    duration?: number | null
-    freePreview?: boolean | null
-    thumbnail?: SanityImage | null
-  } | null>
+  lessons: Array<LessonSummary | null>
 }
 
 export interface Course extends CourseSummary {
@@ -66,20 +68,19 @@ export interface Course extends CourseSummary {
   modules: CourseModule[]
 }
 
-export interface Lesson extends Omit<CourseModule['lessons'][number], '_id'> {
-  _id: string
+export interface Lesson extends LessonSummary {
   videoUrl: string
   studentCount?: number | null
   notes?: Array<Record<string, unknown>> | null
-  keyPoints: Array<{ _key: string; title: string }>
+  keyPoints?: Array<{ _key: string; title: string }> | null
   proTip?: string | null
-  resources: Array<{
+  resources?: Array<{
     _key: string
     type: string
     title: string
     description?: string | null
     url: string
-  }>
+  }> | null
   course?: {
     _id: string
     title: string

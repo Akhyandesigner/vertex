@@ -1,4 +1,3 @@
-import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {type ListItemBuilder, type StructureBuilder, structureTool} from 'sanity/structure'
 import {markdownSchema} from 'sanity-plugin-markdown'
@@ -52,7 +51,6 @@ export default defineConfig({
           ])
       },
     }),
-    visionTool(),
     markdownSchema(),
   ],
 

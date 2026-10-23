@@ -31,7 +31,7 @@ export const coursesQuery = defineQuery(`
 export const courseBySlugQuery = defineQuery(`
   *[_type == "course" && slug.current == $slug][0] {
     ${courseSummaryProjection},
-    learningOutcomes[]{_key, icon, title, description},
+    learningOutcomes: coalesce(learningOutcomes, [])[]{_key, icon, title, description},
     modules[]{
       _key,
       title,

@@ -1,0 +1,22 @@
+{
+  "name": "vertex-studio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "dotenv -e ../.env.local -- node scripts/sanity-cli.mjs dev",
+    "build": "dotenv -e ../.env.local -- node scripts/sanity-cli.mjs build",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sanity/vision": "^5.31.2",
+    "sanity": "^5.31.2",
+    "styled-components": "^6.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv-cli": "^11.0.0",
+    "typescript": "^5"
+  }
+}

@@ -1,20 +1,19 @@
-function requiredEnv(...names: string[]): string {
-  for (const name of names) {
-    const value = process.env[name]?.trim()
-    if (value) return value
-  }
+function required(value: string | undefined, names: string): string {
+  const trimmed = value?.trim()
+  if (trimmed) return trimmed
 
-  throw new Error(`Missing Studio setting: ${names.join(' or ')}`)
+  throw new Error(`Missing Studio setting: ${names}`)
 }
 
-export const projectId = requiredEnv(
-  'SANITY_STUDIO_PROJECT_ID',
-  'NEXT_PUBLIC_SANITY_PROJECT_ID',
+export const projectId = required(
+  process.env.SANITY_STUDIO_PROJECT_ID ||
+    process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  'SANITY_STUDIO_PROJECT_ID or NEXT_PUBLIC_SANITY_PROJECT_ID',
 )
 
-export const dataset = requiredEnv(
-  'SANITY_STUDIO_DATASET',
-  'NEXT_PUBLIC_SANITY_DATASET',
+export const dataset = required(
+  process.env.SANITY_STUDIO_DATASET || process.env.NEXT_PUBLIC_SANITY_DATASET,
+  'SANITY_STUDIO_DATASET or NEXT_PUBLIC_SANITY_DATASET',
 )
 
 export const apiVersion =
